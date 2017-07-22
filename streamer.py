@@ -7,7 +7,7 @@ class Streamer(object):
     PID_FILE = "dvblast.pid"
     CONFIG_FILE = "dvblast.config"
     CONFIG_ENTRY = "%s:%s 1 %s"
-    MULTICAST_IP = "224.0.0.0"
+    MULTICAST_IP = "225.0.0.41"
     MULTICAST_PORT = "20000"
 
     def __init__(self, channel):
