@@ -3,7 +3,7 @@ import subprocess, os, signal, sys
 
 class Streamer(object):
     STREAM_CMD = "dvblast"
-    STREAM_CMD_ARGS = "-f %s 1 -c %s -m %s"
+    STREAM_CMD_ARGS = "-a 0 -f %s 1 -c %s -m %s -b 8"
     PID_FILE = "dvblast.pid"
     CONFIG_FILE = "dvblast.config"
     CONFIG_ENTRY = "%s:%s 1 %s"
@@ -16,7 +16,7 @@ class Streamer(object):
     def stream(self):
         print("Streaming %s" % self.channel.getName())
         self.write_config()
-        # print(self.STREAM_CMD_ARGS % (self.channel.getFrequency(), self.CONFIG_FILE, self.channel.modulation))
+        print(self.STREAM_CMD_ARGS % (self.channel.getFrequency(), self.CONFIG_FILE, self.channel.modulation))
         self.terminate_if_running()
         process = subprocess.Popen([self.STREAM_CMD, self.STREAM_CMD_ARGS], stdout=subprocess.PIPE)
         self.write_pid(process.pid)
@@ -42,12 +42,14 @@ class Streamer(object):
         return pid
 
     def terminate_if_running(self):
-        pid = self.get_pid()
         try:
+            pid = self.get_pid()
             os.kill(int(pid), signal.SIGTERM)
         except OSError as e:
             # nothing to kill
             pass
+        except FileNotFoundError as e:
+            print("Nothing to kill, no PID found %s" % format(e))
 
     def get_file_location(self, file):
         return os.path.join(os.path.join(sys.path[0], file))
