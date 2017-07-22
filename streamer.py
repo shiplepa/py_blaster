@@ -3,7 +3,7 @@ import subprocess, os, signal, sys
 
 class Streamer(object):
     STREAM_CMD = "dvblast"
-    STREAM_CMD_ARGS = "-a 0 -f %s 1 -c %s -m %s -b 8"
+    STREAM_CMD_ARGS = "-a 0 -f %s -c %s -m %s -b 8"
     PID_FILE = "dvblast.pid"
     CONFIG_FILE = "dvblast.config"
     CONFIG_ENTRY = "%s:%s 1 %s"
