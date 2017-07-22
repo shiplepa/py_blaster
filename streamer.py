@@ -3,13 +3,10 @@ import os, signal
 
 
 class Streamer(object):
-    # STREAM_CMD = "dvblast"
-    STREAM_CMD = "C:/Program Files (x86)/Mozilla Firefox/firefox.exe"
-    # STREAM_CMD_ARGS = "-f %s 1 -c %s -m %s"
-    STREAM_CMD_ARGS = "http://yahoo.co.uk"
-    PID_FILE = "d:/dvblast.pid"
-    # CONFIG_FILE = "/tmp/dvblast.config"
-    CONFIG_FILE = "d:/dvblast.config"
+    STREAM_CMD = "dvblast"
+    STREAM_CMD_ARGS = "-f %s 1 -c %s -m %s"
+    PID_FILE = "/var/run/dvblast.pid"
+    CONFIG_FILE = "/tmp/dvblast.config"
     CONFIG_ENTRY = "%s:%s 1 %s"
     MULTICAST_IP = "224.0.0.0"
     MULTICAST_PORT = "20000"
