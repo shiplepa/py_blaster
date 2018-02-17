@@ -23,7 +23,7 @@ class Streamer(object):
 
     def write_config(self):
         f = open(self.get_file_location(self.CONFIG_FILE), 'w')
-        f.write(self.CONFIG_ENTRY % (self.MULTICAST_IP, self.MULTICAST_PORT, self.channel.getId()))
+        f.write(self.CONFIG_ENTRY % (self.MULTICAST_IP, self.MULTICAST_PORT, self.channel.getChannelId()))
         f.close()
 
     def write_pid(self, pid):

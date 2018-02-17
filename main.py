@@ -2,16 +2,17 @@ import argparse, sys, os
 from channel_parser import ChannelParser
 from channel_chooser import ChannelChooser
 
-channels = {}
-
 
 def process_channels(content):
+    channels = {}
     for row in content:
         parser = ChannelParser()
         ch = parser.parse(row)
         if ch:
-            channels[ch.getId()] = ch
-    sorted(channels.values(), key=lambda x: x.name)
+            channels[ch.getChannelId()] = ch
+
+    channels = sorted(channels.values(), key=lambda x: x.getName())
+    return channels
 
 
 def main():
@@ -39,7 +40,7 @@ def main():
     # you may also want to remove whitespace characters like `\n` at the end of each line
     content = [x.strip() for x in content]
 
-    process_channels(content)
+    channels = process_channels(content)
 
     if stream is None:
         # Show channels
