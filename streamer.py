@@ -2,8 +2,7 @@ import subprocess, os, signal, sys
 
 
 class Streamer(object):
-    STREAM_CMD = "dvblast"
-    STREAM_CMD_ARGS = "-a 0 -f %s -c %s -m %s -b 8"
+    STREAM_CMD = "/usr/bin/dvblast -q -l -a 0 -f %s -c %s -m %s -b 8"
     PID_FILE = "dvblast.pid"
     CONFIG_FILE = "dvblast.config"
     CONFIG_ENTRY = "%s:%s 1 %s"
@@ -16,9 +15,9 @@ class Streamer(object):
     def stream(self):
         print("Streaming %s" % self.channel.getName())
         self.write_config()
-        print(self.STREAM_CMD_ARGS % (self.channel.getFrequency(), self.CONFIG_FILE, self.channel.modulation))
+        stream_args = self.STREAM_CMD % (self.channel.getFrequency(), self.CONFIG_FILE, self.channel.modulation)
         self.terminate_if_running()
-        process = subprocess.Popen([self.STREAM_CMD, self.STREAM_CMD_ARGS], stdout=subprocess.PIPE)
+        process = subprocess.Popen(stream_args.split(), )
         self.write_pid(process.pid)
 
     def write_config(self):
